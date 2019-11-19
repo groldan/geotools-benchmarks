@@ -17,3 +17,4 @@ workspace
 .metadata
 .gradle
 benchmark-results-*
+jmh-result.csv
