@@ -8,10 +8,10 @@
     <version>24-SNAPSHOT</version>
   </parent>
 
-  <artifactId>gt-library-benchmarks</artifactId>
+  <artifactId>gt-plugin-benchmarks</artifactId>
   <packaging>pom</packaging>
   <modules>
-    <module>main</module>
+    <module>shapefile</module>
   </modules>
 
 </project>

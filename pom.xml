@@ -2,15 +2,12 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
   xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-  <parent>
-    <groupId>org.geotools</groupId>
-    <artifactId>geotools</artifactId>
-    <version>23-SNAPSHOT</version>
-  </parent>
+  <!-- <parent> <groupId>org.geotools</groupId> <artifactId>geotools</artifactId> <version>24-SNAPSHOT</version> </parent> -->
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.geotools.benchmarks</groupId>
   <artifactId>gt-benchmarks-parent</artifactId>
+  <version>24-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>GeoTools Benchmarks</name>
@@ -22,6 +19,7 @@
 
   <modules>
     <module>library</module>
+    <module>plugin</module>
   </modules>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -32,6 +30,59 @@
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>org.geotools</groupId>
+        <artifactId>geotools</artifactId>
+        <version>${project.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.geotools</groupId>
+        <artifactId>gt-main</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.geotools</groupId>
+        <artifactId>gt-shapefile</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.geotools.jdbc</groupId>
+        <artifactId>gt-jdbc-h2</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.geotools</groupId>
+        <artifactId>gt-property</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.geotools.jdbc</groupId>
+        <artifactId>gt-jdbc-postgis</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.geotools.jdbc</groupId>
+        <artifactId>gt-jdbc-h2</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.geotools.jdbc</groupId>
+        <artifactId>gt-jdbc-oracle</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.geotools.jdbc</groupId>
+        <artifactId>gt-jdbc-sqlserver</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.geotools.jdbc</groupId>
+        <artifactId>gt-jdbc-mysql</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
       <dependency>
         <groupId>org.openjdk.jmh</groupId>
         <artifactId>jmh-core</artifactId>
@@ -78,6 +129,29 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-assembly-plugin</artifactId>
           <version>2.6</version>
+          <inherited>true</inherited>
+          <configuration>
+            <descriptors>
+              <descriptor>${project.basedir}/assembly.xml</descriptor>
+            </descriptors>
+          </configuration>
+          <executions>
+            <execution>
+              <id>perf-tests</id>
+              <phase>package</phase>
+              <goals>
+                <goal>single</goal>
+              </goals>
+              <configuration>
+                <attach>true</attach>
+                <archive>
+                  <manifest>
+                    <mainClass>org.openjdk.jmh.Main</mainClass>
+                  </manifest>
+                </archive>
+              </configuration>
+            </execution>
+          </executions>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -109,33 +183,6 @@
                   <version>${jmh.version}</version>
                 </path>
               </annotationProcessorPaths>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <inherited>true</inherited>
-        <configuration>
-          <descriptors>
-            <descriptor>assembly.xml</descriptor>
-          </descriptors>
-        </configuration>
-        <executions>
-          <execution>
-            <id>perf-tests</id>
-            <phase>package</phase>
-            <goals>
-              <goal>single</goal>
-            </goals>
-            <configuration>
-              <attach>true</attach>
-              <archive>
-                <manifest>
-                  <mainClass>org.openjdk.jmh.Main</mainClass>
-                </manifest>
-              </archive>
             </configuration>
           </execution>
         </executions>
