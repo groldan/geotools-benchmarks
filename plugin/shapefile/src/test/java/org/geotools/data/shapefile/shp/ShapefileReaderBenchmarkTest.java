@@ -9,6 +9,8 @@ public class ShapefileReaderBenchmarkTest extends BenchmarkTest {
     }
 
     public static void main(String... args) throws Exception {
-        new ShapefileReaderBenchmarkTest().runJmhBenchmark();//hBenchmarkDebugMode("getAvailableDataStores");
+        ShapefileReaderBenchmarkTest test = new ShapefileReaderBenchmarkTest();
+        //test.runJmhBenchmark();
+        test.runJmhBenchmarkDebugMode("largePolygon_shape");
     }
 }
