@@ -46,6 +46,10 @@ public abstract class BenchmarkTest {
         assertFalse(runResults.isEmpty());
     }
 
+    public void runJmhBenchmarkDebugMode() throws RunnerException {
+        runJmhBenchmarkDebugMode(null);
+    }
+    
     public void runJmhBenchmarkDebugMode(String include) throws RunnerException {
         Version version = GeoTools.getVersion();
         String buildRevision = GeoTools.getBuildRevision();

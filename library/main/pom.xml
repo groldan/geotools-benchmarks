@@ -34,26 +34,6 @@
       <artifactId>gt-property</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.geotools.jdbc</groupId>
-      <artifactId>gt-jdbc-postgis</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.geotools.jdbc</groupId>
-      <artifactId>gt-jdbc-h2</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.geotools.jdbc</groupId>
-      <artifactId>gt-jdbc-oracle</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.geotools.jdbc</groupId>
-      <artifactId>gt-jdbc-sqlserver</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.geotools.jdbc</groupId>
-      <artifactId>gt-jdbc-mysql</artifactId>
-    </dependency>
-    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
     </dependency>
@@ -69,4 +49,34 @@
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>jdbc</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>org.geotools.jdbc</groupId>
+          <artifactId>gt-jdbc-postgis</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.geotools.jdbc</groupId>
+          <artifactId>gt-jdbc-h2</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.geotools.jdbc</groupId>
+          <artifactId>gt-jdbc-oracle</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.geotools.jdbc</groupId>
+          <artifactId>gt-jdbc-sqlserver</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.geotools.jdbc</groupId>
+          <artifactId>gt-jdbc-mysql</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
 </project>
